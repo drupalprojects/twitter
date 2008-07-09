@@ -136,6 +136,6 @@ function twitter_cron() {
 
   // Nuke old statuses.
   if ($age = variable_get('twitter_expire', 0)) {
-    db_query('DELETE {twitter} WHERE created_time < %d', time() - $age);
+    db_query('DELETE FROM {twitter} WHERE created_time < %d', time() - $age);
   }
 }
