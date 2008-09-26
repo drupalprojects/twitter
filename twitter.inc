@@ -378,7 +378,7 @@ function twitter_cache_status($status = array(), $silent = FALSE) {
 function twitter_get_user_accounts($uid, $only_with_passwords = FALSE) {
   $sql = "SELECT ta.*, tu.uid, tu.password, tu.import FROM {twitter_user} tu LEFT JOIN {twitter_account} ta ON (tu.screen_name = ta.screen_name) WHERE tu.uid = %d";
   if ($only_with_passwords) {
-    $sql .= " AND tu.password IS NULL";
+    $sql .= " AND tu.password IS NOT NULL";
   }
   $args = array($uid);
   $results = db_query($sql, $args);
