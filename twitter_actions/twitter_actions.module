@@ -143,9 +143,6 @@ function twitter_actions_set_status_action($object, $context) {
       $node = $object;
   }
 
-  $from = variable_get('site_mail', ini_get('sendmail_from'));
-  $recipient = $context['recipient'];
-
   if (isset($node)) {
     if (!isset($account)) {
       $account = user_load(array('uid' => $node->uid));
@@ -173,5 +170,5 @@ function twitter_actions_set_status_action($object, $context) {
   $message = strtr($context['message'], $variables);
 
   module_load_include('inc', 'twitter');
-  twitter_set_status($user_name, $password, $message);
+  twitter_set_status($context['screen_name'], $context['password'], $message);
 }

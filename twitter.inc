@@ -135,7 +135,7 @@ function twitter_set_status($screen_name, $password, $text, $source = 'drupal') 
                    'Content-type' => 'application/x-www-form-urlencoded');
   $data = 'status='. urlencode($text);
   if (!empty($source)) {
-    $data .= 'source='. urlencode($source);
+    $data .= "&source=". urlencode($source);
   }
 
   return drupal_http_request($url, $headers, 'POST', $data);
