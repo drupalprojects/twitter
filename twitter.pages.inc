@@ -46,7 +46,7 @@ function twitter_admin_form() {
     '#title' => t('Default format string'),
     '#maxlength' => 140,
     '#description' => t('The given text will be posted to twitter.com. You can use !url, !title and !user as replacement text.'),
-    '#default_value' => variable_get('twitter_default_format', 'New post: !title (!url)'),
+    '#default_value' => variable_get('twitter_default_format', 'New post: !title - !url'),
   );
 
   $form['twitter_api_url'] = array(

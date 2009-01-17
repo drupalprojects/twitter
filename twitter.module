@@ -69,7 +69,7 @@ function twitter_form_alter(&$form, $form_state, $form_id) {
       '#id' => 'twitter-toggle',
     );
     $form['twitter'] += $twitter_form;
-    $form['twitter']['status']['#default_value'] = variable_get('twitter_default_format', 'New post: !title (!url)');
+    $form['twitter']['status']['#default_value'] = variable_get('twitter_default_format', 'New post: !title - !url');
     $form['twitter']['status']['#description'] = t('The given text will be posted to twitter.com. You can use !url, !title and !user as replacement text.');
   }
 }
