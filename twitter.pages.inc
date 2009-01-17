@@ -49,6 +49,14 @@ function twitter_admin_form() {
     '#default_value' => variable_get('twitter_default_format', 'New post: !title (!url)'),
   );
 
+  $form['twitter_api_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Alternate API URL'),
+    '#default_value' => variable_get('twitter_api_url', 'twitter.com'),
+    '#description' => t("A Twitter-compatible microblogging services like !identica can be used insted of Twitter.com by entering the service's API URL here.",
+      array('!identica' => l('Identi.ca', 'http://laconi.ca/trac/wiki/TwitterCompatibleAPI'))),
+  );
+
   return system_settings_form($form);
 }
 
