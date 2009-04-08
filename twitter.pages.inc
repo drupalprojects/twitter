@@ -15,7 +15,6 @@ function twitter_admin_form() {
 
   $form['global_account']['twitter_global_name'] = array(
     '#type' => 'textfield',
-    '#required' => TRUE,
     '#title' => t('Twitter user name'),
     '#default_value' => variable_get('twitter_global_name', NULL),
   );
