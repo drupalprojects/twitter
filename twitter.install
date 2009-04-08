@@ -17,7 +17,7 @@ function twitter_schema() {
         'description' => t("Screen name of the {twitter} user."),
         'type' => 'varchar',
         'length' => 255,
-        'not null' => TRUE
+        'not null' => TRUE,
         'default' => ''
       ),
       'created_at' => array(
@@ -201,15 +201,6 @@ function twitter_update_6001() {
 function twitter_update_6002() {
   $ret = array();
   $ret[] = update_sql("UPDATE {system} SET weight = 3 WHERE name = 'twitter'");
-  return $ret;
-}
-
-/**
- * Ensure usernames are NOT NULL. http://drupal.org/node/336048
- */
-function twitter_update_6003() {
-  $ret = array();
-  db_change_column($ret, 'twitter', 'screen_name', 'screen_name', 'varchar', array('length' => 255, 'not null' => TRUE, 'default' => "''"));
   return $ret;
 }
 
