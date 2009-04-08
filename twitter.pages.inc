@@ -64,7 +64,10 @@ function twitter_user_settings($account) {
   module_load_include('inc', 'twitter');
 
   $output = '';
-  $twitter_accounts = twitter_get_user_accounts($account->uid);
+  // This is directly calling a hook implementation, which is bad and naughty,
+  // but oh well. We'll fix this in the next reshuffling when user account
+  // management gets an overhaul.
+  $twitter_accounts = twitter_twitter_accounts($account);
   if (!empty($twitter_accounts)) {
     $output .= drupal_get_form('twitter_account_list_form', $twitter_accounts);
   }

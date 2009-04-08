@@ -396,8 +396,8 @@ function twitter_cache_status($status = array(), $silent = FALSE) {
  */
 
 function twitter_get_user_accounts($uid, $full_access = FALSE) {
-  $account = user_load($uid);
-  return module_invoke_all('twitter_accounts', $user, $full_access);
+  $drupal_user = user_load($uid);
+  return module_invoke_all('twitter_accounts', $drupal_user, $full_access);
 }
 
 function twitter_user_save($account = array(), $force_import = FALSE) {
