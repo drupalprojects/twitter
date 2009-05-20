@@ -74,6 +74,8 @@ function twitter_actions_set_status_action_validate($form, $form_state) {
   $pass = $form_state['values']['password'];
   $name = $form_state['values']['screen_name'];
 
+  module_load_include('inc', 'twitter');
+
   $valid = twitter_authenticate($name, $pass);
   if (!$valid) {
     form_set_error('password', t('Twitter authentication failed. Please check your account name and try again.'));
