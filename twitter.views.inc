@@ -66,6 +66,16 @@ function twitter_views_data() {
     ),
   );
 
+  // Twitter status id
+  $data['twitter']['twitter_id'] = array(
+    'title' => t('Status ID'),
+    'help' => t('The ID of the Twitter status message.'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => FALSE,
+    ),
+  );
+
   // Twitter message timestamp
   $data['twitter']['created_time'] = array(
     'title' => t('Created time'),
