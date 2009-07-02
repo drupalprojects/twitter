@@ -407,7 +407,7 @@ function twitter_update_6007() {
       'type' => 'int',
       'not null' => TRUE,
       'default' => 0,
-    ),
+    )
   );
   return $ret;
 }
