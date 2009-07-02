@@ -2,7 +2,7 @@
 // $Id$
 
 /**
- * Implementation of hook_schema).
+ * Implementation of hook_schema().
  */
 function twitter_schema() {
   $schema['twitter'] = array(
@@ -190,7 +190,7 @@ function twitter_install() {
   // Create tables.
   drupal_install_schema('twitter');
 
-  // Set the weight to 3, making it heaving than Pathauto.
+  // Set the weight to 3, making it heavier than Pathauto.
   db_query("UPDATE {system} SET weight = 3 WHERE name = 'twitter'");
 }
 
