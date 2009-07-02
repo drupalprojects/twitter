@@ -105,7 +105,7 @@ function twitter_form_alter(&$form, $form_state, $form_id) {
  *
  * Intercepts newly published nodes and posts noticed to Twitter.
  */
-function twitter_nodeapi(&$node, $op, $a1) {
+function twitter_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
   module_load_include('inc', 'twitter');
 
   switch ($op) {
