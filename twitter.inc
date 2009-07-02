@@ -134,7 +134,7 @@ function twitter_set_status($screen_name, $password, $text, $source = 'drupal') 
   $headers = array('Authorization' => 'Basic '. base64_encode($screen_name .':'. $password),
                    'Content-type' => 'application/x-www-form-urlencoded');
   $data = 'status='. urlencode($text);
-  if (!empty($source)) {
+  if (!empty($source) && variable_get('twitter_set_source', TRUE)) {
     $data .= "&source=". urlencode($source);
   }
 

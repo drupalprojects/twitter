@@ -76,6 +76,12 @@ function twitter_admin_form() {
       array('!identica' => l('Identi.ca', 'http://laconi.ca/trac/wiki/TwitterCompatibleAPI'))),
   );
 
+  $form['twitter_set_source'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Set source to Drupal when updating Twitter status'),
+    '#default_value' => variable_get('twitter_set_source', TRUE),
+  );
+
   return system_settings_form($form);
 }
 
