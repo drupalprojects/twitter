@@ -143,8 +143,8 @@ function twitter_nodeapi(&$node, $op, $a1) {
  * Very lightweight helper function to generate a TinyURL for a given post.
  */
 function twitter_shorten_url($url) {
-  if (function_exists('custom_twitter_shorten_url')) {
-    return custom_twitter_shorten_url($url);
+  if (module_exists('shorten')) {
+    return shorten_url($url);
   }
   else {
     $response = drupal_http_request("http://tinyurl.com/api-create.php?url=" . $url);
