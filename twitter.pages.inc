@@ -257,6 +257,14 @@ function twitter_add_account_submit($form, &$form_state) {
   module_load_include('inc', 'twitter');
 
   if (!empty($form_state['values']['screen_name'])) {
+    // if the password wasn't empty either get the account info
+    // so we can figure out if the account is protected
+    if (!empty($form_state['values']['password'])) {
+      $account = twitter_fetch_account_info($form_state['values']['screen_name'], $form_state['values']['password']);
+      if ($account['protected']) {
+        $form_state['values']['protected'] = TRUE;
+      }
+    }
     twitter_user_save($form_state['values'], TRUE);
   }
 }

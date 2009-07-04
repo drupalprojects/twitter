@@ -373,6 +373,15 @@ function _twitter_request_failure($results) {
  * @see twitter_cache_status()
  */
 function twitter_cache_account($twitter_account = array()) {
+  // convert boolean into int since it doesn't appear to be
+  // handled correctly otherwise
+  if ($twitter_account['protected']) {
+    $twitter_account['protected'] = 1;
+  }
+  else {
+    $twitter_account['protected'] = 0;
+  }
+  
   db_query("DELETE FROM {twitter_account} WHERE twitter_uid = %n", $twitter_account['twitter_uid']);
   drupal_write_record('twitter_account', $twitter_account);
 }
