@@ -39,7 +39,6 @@ function twitter_form($account = NULL) {
         '#type' => 'select',
         '#title' => t('Account'),
         '#options' => $twitter_accounts,
-        '#access' => user_access(''),
         '#id' => 'twitter-account',
       );
     }
