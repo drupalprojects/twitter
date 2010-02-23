@@ -1,5 +1,6 @@
 ; $Id$
 name = Twitter
 description = Adds integration with the Twitter microblogging service.
+dependencies[] = token
 php = 5.1
 core = 6.x
