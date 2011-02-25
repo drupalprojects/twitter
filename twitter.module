@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 define('TWITTER_URL', 'http://twitter.com/statuses/update.xml');
 
