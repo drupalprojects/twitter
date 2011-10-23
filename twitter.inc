@@ -481,7 +481,15 @@ function twitter_user_delete($uid, $screen_name = NULL) {
 
 function _twitter_convert_xml_to_array($data) {
   $results = array();
-  $xml = new SimpleXMLElement($data);
+  try {
+    $xml = new SimpleXMLElement($data);
+  }
+  catch (Exception $e) {
+    watchdog('twitter', t('Convering XML to array failed. One possible reason is that ' .
+      'Twitter is down now. The convert failed with the following error: !exception.'),
+      array('!exception' => $e));
+    return $results;
+  }
   if (!empty($xml->name)) {
     // Top-level user information.
     $results[] = _twitter_convert_user($xml);
