@@ -203,6 +203,7 @@ function theme_twitter_account_list_form($form) {
 }
 
 function twitter_account_list_form_submit($form, &$form_state) {
+  module_load_include('inc', 'twitter');
   $accounts = $form_state['values']['accounts'];
   foreach($accounts as $account) {
     if (empty($account['delete'])) {
