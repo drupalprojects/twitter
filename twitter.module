@@ -214,9 +214,9 @@ function twitter_link_filter($text, $prefix = '@', $destination = '') {
     $destination = variable_get('twitter_host', TWITTER_HOST) . '/';
   }
   $matches = array(
-    '/\>' . $prefix . '([a-z0-9_]+)/i',
-    '/^' . $prefix . '([a-z0-9_]+)/i',
-    '/(\s+)' . $prefix . '([a-z0-9_]+)/i',
+    '/\>' . $prefix . '(\w+)/ui',
+    '/^' . $prefix . '(\w+)/ui',
+    '/(\s+)' . $prefix . '(\w+)/ui',
   );
   $replacements = array(
     '><a href="' . $destination . '${1}" target="_blank">' . $prefix . '${1}</a>',
