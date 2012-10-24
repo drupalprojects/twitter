@@ -155,7 +155,7 @@ function _twitter_account_list_row($account) {
 function theme_twitter_account_list_form($form) {
   if (variable_get('twitter_import', TRUE) && user_access('import own tweets')) {
     $header = array('', t('Name'), t('Description'), t('Private'), t('Import'), t('Retweets'), t('Delete'));
-  } 
+  }
   else {
     $header = array('', t('Name'), t('Description'), t('Private'), t('Delete'));
   }
@@ -178,7 +178,7 @@ function theme_twitter_account_list_form($form) {
       drupal_render($element['include_retweets']),
       drupal_render($element['delete']),
       );
-    } 
+    }
     else {
       $row = array(
       drupal_render($element['image']),
@@ -280,7 +280,7 @@ function twitter_account_form($form_state, $account = NULL) {
       '#required' => TRUE,
       '#title' => t('Twitter user name'),
     );
-    
+
     $form['import'] = array(
       '#type' => 'checkbox',
       '#title' => t('Import statuses from this account'),
@@ -319,7 +319,7 @@ function twitter_account_oauth_validate($form, &$form_state) {
   $twitter = new TwitterOAuth($key, $secret);
   $token = $twitter->get_request_token();
 
-  $_SESSION['twitter_oauth']['account'] = user_load($form['uid']['#value']);  
+  $_SESSION['twitter_oauth']['account'] = user_load($form['uid']['#value']);
   $_SESSION['twitter_oauth']['token'] = $token;
   $_SESSION['twitter_oauth']['destination'] = $_GET['q'];
   drupal_goto($twitter->get_authorize_url($token));
