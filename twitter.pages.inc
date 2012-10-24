@@ -325,7 +325,6 @@ function twitter_account_oauth_validate($form, &$form_state) {
   drupal_goto($twitter->get_authorize_url($token));
 }
 
-
 function twitter_oauth_callback(&$form_state) {
   if (isset($_GET['denied']) || empty($_GET['oauth_token'])) {
     drupal_set_message(t('The connection to Twitter failed. Please try again.'), 'error');

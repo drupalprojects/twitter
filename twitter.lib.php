@@ -60,7 +60,22 @@ class TwitterConf {
 /**
  * Exception handling class.
  */
-class TwitterException extends Exception {}
+class TwitterException extends Exception {
+  /**
+   * Overrides constructor to log the error.
+   */
+  public function __construct($message = NULL, $code = 0, Exception $previous = NULL) {
+    watchdog('twitter', 'Unexpected error: @message', array(
+      '@message' => $message,
+    ), WATCHDOG_ERROR);
+    if (is_null($previous)) {
+      parent::__construct($message, $code);
+    }
+    else {
+      parent::__construct($message, $code, $previous);
+    }
+  }
+}
 
 /**
  * Primary Twitter API implementation class
@@ -167,26 +182,24 @@ class Twitter {
   }
 
   /**
+   * Post a new status.
    *
-   * @see http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-statuses%C2%A0update
+   * @see https://dev.twitter.com/docs/api/1/post/statuses/update
    */
   public function status_update($status, $params = array()) {
     $params['status'] = $status;
     if ($this->source) {
       $params['source'] = $this->source;
     }
-    $values = $this->call('statuses/update', $params, 'POST', TRUE);
-    // If $values is null then there was an error with Twitter
-    // and it has has already been set with drupal_set_message().
-    if (is_array($values)) {
+    if ($values = $this->call('statuses/update', $params, 'POST', TRUE)) {
       return new TwitterStatus($values);
     }
   }
 
-
   /**
+   * Returns profile information about a user.
    *
-   * @see http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-users%C2%A0show
+   * @see https://dev.twitter.com/docs/api/1/get/users/show
    */
   public function users_show($id, $use_auth = TRUE) {
     $params = array();
@@ -197,22 +210,20 @@ class Twitter {
       $params['screen_name'] = $id;
     }
 
-    $values = $this->call('users/show', $params, 'GET', $use_auth);
-    return new TwitterUser($values);
+    if ($values = $this->call('users/show', $params, 'GET', $use_auth)) {
+      return new TwitterUser($values);
+    }
   }
 
   /**
    *
-   * @see http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-account%C2%A0verify_credentials
+   * @see https://dev.twitter.com/docs/api/1/get/account/verify_credentials
    */
   public function verify_credentials() {
-    $values = $this->call('account/verify_credentials', array(), 'GET', TRUE);
-    if (!$values) {
-      return FALSE;
+    if ($values = $this->call('account/verify_credentials', array(), 'GET', TRUE)) {
+      return new TwitterUser($values);
     }
-    return new TwitterUser($values);
   }
-
 
   /**
    * Calls a twitter api resource
