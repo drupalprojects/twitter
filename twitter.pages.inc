@@ -327,8 +327,20 @@ function twitter_account_oauth_validate($form, &$form_state) {
 
 
 function twitter_oauth_callback(&$form_state) {
-  $form['#post']['oauth_token'] = $_GET['oauth_token'];
+  if (isset($_GET['denied']) || empty($_GET['oauth_token'])) {
+    drupal_set_message(t('The connection to Twitter failed. Please try again.'), 'error');
+    global $user;
+    if ($user->uid) {
+      // User is logged in, was attempting to OAuth a Twitter account.
+      drupal_goto('user/' . $user->uid . '/edit/twitter');
+    }
+    else {
+      // Anonymous user, redirect to front page.
+      drupal_goto('<front>');
+    }
+  }
 
+  $form['#post']['oauth_token'] = $_GET['oauth_token'];
   $form['oauth_token'] = array(
     '#type' => 'hidden',
     '#default_value' => $_GET['oauth_token'],
