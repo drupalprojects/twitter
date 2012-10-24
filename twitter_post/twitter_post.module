@@ -195,8 +195,8 @@ function twitter_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
           }
         }
         catch (TwitterException $e) {
-          drupal_set_message(t('An error occurred when posting to twitter: %code %error',
-                               array('%code' => $result->code, '%error' => $result->error)), 'warning');
+          drupal_set_message(t('An error occurred when posting to twitter: %error (%code)',
+                               array('%code' => $e->getCode(), '%error' => $e->getMessage())), 'warning');
         }
       }
       break;
