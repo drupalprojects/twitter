@@ -100,7 +100,14 @@ function twitter_fetch_user_timeline($id) {
     $params['include_rts'] = true;
   }
 
-  $statuses = $twitter->user_timeline($account->id, $params, $account->protected);
+  if(get_class($twitter) == 'TwitterOAuth') {
+    $use_oauth = TRUE;
+  }
+  else {
+    $use_oauth = FALSE;
+  }
+
+  $statuses = $twitter->user_timeline($account->id, $params, $use_oauth);
   foreach ($statuses as $status) {
     twitter_status_save($status);
   }
