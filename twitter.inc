@@ -158,8 +158,24 @@ function twitter_fetch_mentions_timeline($id) {
   $twitter = twitter_connect($account);
 
   $params = array();
-
   $statuses = $twitter->mentions_timeline($params);
+  foreach ($statuses as $status) {
+    if (!twitter_account_load($status->user->id)) {
+      twitter_account_save($status->user);
+    }
+    twitter_status_save($status);
+  }
+}
+
+/**
+ * Fetches user's favorites.
+ */
+function twitter_fetch_favorites($id) {
+  $account = twitter_account_load($id);
+  $twitter = twitter_connect($account);
+
+  $params = array();
+  $statuses = $twitter->favorites_list($account->screen_name, $params);
   foreach ($statuses as $status) {
     if (!twitter_account_load($status->user->id)) {
       twitter_account_save($status->user);

@@ -157,6 +157,9 @@ function twitter_cron() {
       if ($twitter_account->mentions) {
         twitter_fetch_mentions_timeline($twitter_account->id);
       }
+      if ($twitter_account->favorites) {
+        twitter_fetch_favorites($twitter_account->id);
+      }
       // Mark the time this account was updated.
       db_update('twitter_account')
         ->fields(array(

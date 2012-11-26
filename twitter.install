@@ -315,6 +315,13 @@ function twitter_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'favorites' => array(
+        'description' => "Boolean flag indicating whether the {twitter_user}'s favorites should be pulled in by the site.",
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
       'last_refresh' => array(
         'description' => "A UNIX timestamp marking the date Twitter statuses were last fetched on.",
         'type' => 'int',
@@ -400,4 +407,18 @@ function twitter_update_7400() {
     'default' => 0,
   );
   db_add_field('twitter_account', 'mentions', $data);
+}
+
+/**
+ * Adds field favorites to twitter_account table.
+ */
+function twitter_update_7401() {
+  $data = array(
+    'description' => "Boolean flag indicating whether the {twitter_user}'s favorites should be pulled in by the site.",
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  );
+  db_add_field('twitter_account', 'favorites', $data);
 }

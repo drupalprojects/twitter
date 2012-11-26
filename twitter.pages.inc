@@ -165,7 +165,10 @@ function _twitter_account_list_row($account) {
       '#type' => 'checkbox',
       '#default_value' => $account->mentions ? $account->mentions : '',
     );
-
+    $form['favorites'] = array(
+      '#type' => 'checkbox',
+      '#default_value' => $account->favorites ? $account->favorites: '',
+    );
   }
 
   $form['delete'] = array(
