@@ -134,7 +134,7 @@ function twitter_shorten_url($url) {
  * Imports new Twitter statuses for site users, and deletes expired tweets.
  */
 function twitter_cron() {
-  if (!variable_get('twitter_import', TRUE)) {
+  if (!variable_get('twitter_import', TRUE) || !twitter_api_keys()) {
     return;
   }
 
@@ -335,4 +335,16 @@ function twitter_user_delete($account) {
   foreach ($account->twitter_accounts as $twitter_account) {
     twitter_account_delete($twitter_account->id);
   }
+}
+
+/**
+ * Checks if the Twitter Application keys are set.
+ *
+ * @return
+ *   boolean TRUE if both the Twitter Application key and secret are set.
+ */
+function twitter_api_keys() {
+  $key = variable_get('twitter_consumer_key');
+  $secret = variable_get('twitter_consumer_secret');
+  return !(empty($key) && empty($secret));
 }
