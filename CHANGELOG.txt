@@ -1,6 +1,7 @@
 Twitter 7.x-5.x-dev, xxxx-xx-xx
 -------------------------------
 #2565907 by anbuece: Undefined variable in twitter_post_field_extra_fields().
+#2567021 by Andy_D: Missing variables for tweet display via Views.
 
 
 Twitter 7.x-5.10, 2015-09-04
