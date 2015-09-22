@@ -74,16 +74,16 @@ function twitter_signin_theme() {
  */
 function theme_twitter_signin_button() {
   $button = variable_get('twitter_signin_button', 'Sign-in-with-Twitter-lighter-small.png');
-  $class = array('twitter-signin-menuitem');
+  $class = 'twitter-signin-menuitem';
 
   if ($button == 'just-text') {
     $item = t('Sign in with Twitter');
-    $class[] = 'twitter-signin-menuitem-just-text';
+    $class .= ' twitter-signin-menuitem-just-text';
     $link = l($item, 'twitter/redirect', array('attributes' => array('class' => $class)));
   }
   else {
     $img = drupal_get_path('module', 'twitter_signin') . '/images/' . $button;
-    $class[] = 'twitter-signin-menuitem-image';
+    $class .= ' twitter-signin-menuitem-image';
     $item = theme('image', $img, t('Sign in with Twitter'));
     $link = l($item, 'twitter/redirect', array('html' => TRUE, 'attributes' => array('class' => $class)));
   }
