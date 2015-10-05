@@ -1,5 +1,5 @@
-Twitter 6.x-5.x-dev, xxxx-xx-xx
--------------------------------
+Twitter 6.x-5.4, 2015-10-05
+---------------------------
 By DamienMcKenna: Keep the same default for all uses of twitter_post_types.
 #2572729 by Ingumsky: The 'class' attribute on links on D6 requires a string.
 #2544672 by gurvan: Fixed the classes added to embedded links to match what is
