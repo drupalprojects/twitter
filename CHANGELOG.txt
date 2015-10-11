@@ -1,3 +1,7 @@
+Twitter 6.x-5.x-dev, xxxx-xx-xx
+-------------------------------
+
+
 Twitter 6.x-5.4, 2015-10-05
 ---------------------------
 By DamienMcKenna: Keep the same default for all uses of twitter_post_types.
