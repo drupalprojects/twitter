@@ -1,5 +1,6 @@
 Twitter 7.x-5.x-dev, xxxx-xx-xx
 -------------------------------
+#1829712 by DamienMcKenna: Expanded dependency information for Drupal 7.40.
 
 
 Twitter 7.x-5.11, 2015-10-05
