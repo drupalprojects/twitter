@@ -2,3 +2,4 @@ Twitter 8.x-1.x-dev, xxxx-xx-xx
 -------------------------------
 Initial port by juampynr.
 #2608158 by dakku: Remove dependency on the Entities module.
+#2548659 by joshi.rohit100: Code cleanup, add permissions.
