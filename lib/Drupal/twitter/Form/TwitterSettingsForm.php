@@ -18,7 +18,7 @@ class TwitterSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormID() {
+  public function getFormId() {
     return 'twitter_settings_form';
   }
 
