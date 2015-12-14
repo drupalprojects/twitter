@@ -5,3 +5,4 @@ Initial port by juampynr.
 #2548659 by joshi.rohit100: Code cleanup, add permissions.
 #2318639 by martin107: Form state is now an interface.
 #2494629 by martin107: getFormID method named incorrectly.
+#2548653 joshi.rohit100: Config path was incorrect.

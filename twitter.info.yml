@@ -7,4 +7,4 @@ dependencies:
   - views
   - libraries
   - oauth
-configure: admin/config/services/twitter
+configure: twitter.settings
