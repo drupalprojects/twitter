@@ -902,7 +902,7 @@ function twitter_update_6505() {
   $ret = array();
 
   // If there is no {twitter_account}.uid field, add it.
-  if (!db_field_exists('twitter_account', 'uid')) {
+  if (!db_column_exists('twitter_account', 'uid')) {
     $spec = array(
      'description' => "The uid of the user who added this Twitter account",
      'type' => 'int',
@@ -913,7 +913,7 @@ function twitter_update_6505() {
 
     // If the 'added_by_uid' field exists, as was added by update 6504 and needs
     // to be renamed.
-    if (db_field_exists('twitter_account', 'added_by_uid')) {
+    if (db_column_exists('twitter_account', 'added_by_uid')) {
       db_change_field($ret, 'twitter_account', 'added_by_uid', 'uid', $spec);
     }
 
