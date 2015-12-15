@@ -25,6 +25,13 @@ class TwitterSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
+  protected function getEditableConfigNames() {
+    return ['twitter.settings'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $twitter_config = $this->configFactory->get('twitter.settings');
     $form['import'] = array(
