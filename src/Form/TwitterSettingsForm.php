@@ -9,6 +9,7 @@ namespace Drupal\twitter\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Component\Utility\MapArray;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 /**
  * Configure twitter settings for this site.
@@ -44,7 +45,7 @@ class TwitterSettingsForm extends ConfigFormBase {
       '#type' => 'select',
       '#title' => t('Delete old statuses'),
       '#default_value' => $twitter_config->get('expire'),
-      '#options' => array(0 => t('Never')) + array_map('format_interval', array_combine($intervals, $intervals)),
+      '#options' => array(0 => t('Never')) + array_map([\Drupal::service('date.formatter'), 'formatInterval'], array_combine($intervals, $intervals)),
       '#states' => array(
          'visible' => array(
            ':input[name=twitter_import]' => array('checked' => TRUE),
@@ -59,7 +60,7 @@ class TwitterSettingsForm extends ConfigFormBase {
     $form['oauth']['callback_url'] = array(
       '#type' => 'item',
       '#title' => t('Callback URL'),
-      '#markup' => url('twitter/oauth', array('absolute' => TRUE)),
+      '#markup' => Url::fromUri('base:twitter/oauth', array('absolute' => TRUE))->toString(),
     );
     $form['oauth']['consumer_key'] = array(
       '#type' => 'textfield',
@@ -106,16 +107,16 @@ class TwitterSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $twitter_config = $this->configFactory->get('twitter.settings');
+    $twitter_config = $this->configFactory->getEditable('twitter.settings');
     $twitter_config
-      ->set('import', $form_state['values']['import'])
-      ->set('expire', $form_state['values']['expire'])
-      ->set('consumer_key', $form_state['values']['consumer_key'])
-      ->set('consumer_secret', $form_state['values']['consumer_secret'])
-      ->set('host', $form_state['values']['host'])
-      ->set('api', $form_state['values']['api'])
-      ->set('search', $form_state['values']['search'])
-      ->set('tinyurl', $form_state['values']['tinyurl'])
+      ->set('import', $form_state->getValue('import'))
+      ->set('expire', $form_state->getValue('expire'))
+      ->set('consumer_key', $form_state->getValue('consumer_key'))
+      ->set('consumer_secret', $form_state->getValue('consumer_secret'))
+      ->set('host', $form_state->getValue('host'))
+      ->set('api', $form_state->getValue('api'))
+      ->set('search', $form_state->getValue('search'))
+      ->set('tinyurl', $form_state->getValue('tinyurl'))
       ->save();
     parent::submitForm($form, $form_state);
   }
