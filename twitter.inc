@@ -156,7 +156,7 @@ function twitter_load_authenticated_accounts($uid = NULL, $access_global = TRUE,
 function twitter_status_save($status) {
   // RT's get special handling.
   if (!empty($status->retweeted_status)) {
-    $text = 'RT @' . $status->retweeted_status->user->screen_name . ': ' . $status->retweeted_status->text;
+    $text = 'RT @' . $status->retweeted_status['user']['screen_name'] . ': ' . $status->retweeted_status['text'];
   }
   else {
     $text = $status->text;
