@@ -1,6 +1,7 @@
 Twitter 7.x-5.x-dev, xxxx-xx-xx
 -------------------------------
 #1829712 by DamienMcKenna: Expanded dependency information for Drupal 7.40.
+#2624178 by fran seva: Fixed importing of RTs.
 
 
 Twitter 7.x-5.11, 2015-10-05
