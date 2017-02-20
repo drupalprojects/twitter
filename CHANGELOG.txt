@@ -2,6 +2,8 @@ Twitter 7.x-5.x-dev, xxxx-xx-xx
 -------------------------------
 #1829712 by DamienMcKenna: Expanded dependency information for Drupal 7.40.
 #2624178/#2584363 by fran seva, joelpittet, SurfinSpirit: Fixed import of RTs.
+#2675832 by JamesOakley: Made Tweets view handler use protocol-relative image
+  URLs.
 
 
 Twitter 7.x-5.11, 2015-10-05
