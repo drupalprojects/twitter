@@ -173,12 +173,13 @@ class twitter_views_handler_field_formatted_tweet extends views_handler_field {
     $twitter_account = reset($twitter_account);
 
     // Render the tweet.
-    return theme('twitter_status', array(
+    $output = theme('twitter_status', array(
       'status' => $twitter_status,
       'author' => $twitter_account,
       'reply' => t('Reply'),
       'retweet' => t('Retweet'),
       'favorite' => t('Favorite'),
     ));
+    return str_replace('http:', '', $output);
   }
 }
