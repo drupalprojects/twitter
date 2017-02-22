@@ -39,7 +39,7 @@ function twitter_admin_form($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => t('OAuth Settings'),
     '#access' => module_exists('oauth_common'),
-    '#description' => t('To enable OAuth based access for twitter, you must <a href="@url">register your application</a> with Twitter and add the provided keys here.', array('@url' => 'https://dev.twitter.com/apps/new')),
+    '#description' => t('To enable OAuth based access for twitter, you must <a href="@url">register your application</a> with Twitter and add the provided keys here.', array('@url' => 'https://apps.twitter.com/app/new')),
   );
   $form['oauth']['twitter_oauth_callback_url'] = array(
     '#type' => 'textfield',
