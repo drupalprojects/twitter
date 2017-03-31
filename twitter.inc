@@ -220,7 +220,7 @@ function twitter_status_load($status_id) {
 function twitter_status_save($status) {
   // RT's get special handling.
   if (!empty($status->retweeted_status)) {
-    $text = 'RT @' . $status->retweeted_status['user']['screen_name'] . ': ' . $status->retweeted_status['text'];
+    $text = 'RT @' . $status->retweeted_status->user->screen_name . ': ' . $status->retweeted_status->text;
   }
   else {
     $text = $status->text;
