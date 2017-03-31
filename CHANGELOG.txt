@@ -6,6 +6,7 @@ Twitter 7.x-6.x-dev, xxxx-xx-xx
 #2624178/#2584363 by fran seva, joelpittet, SurfinSpirit: Fixed import of RTs.
 #2675832 by JamesOakley: Made Tweets view handler use protocol-relative image
   URLs.
+#2803293 by pifagor, soorajshai: Retweets were not being saved correctly.
 
 
 Twitter 7.x-6.2, 2015-10-05
