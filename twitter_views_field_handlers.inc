@@ -172,6 +172,17 @@ class twitter_views_handler_field_formatted_tweet extends views_handler_field {
     $twitter_account = entity_load('twitter_account', FALSE, array('screen_name' => $twitter_status->screen_name));
     $twitter_account = reset($twitter_account);
 
+    // Replace retweet data
+    if (preg_match('/^RT\s@(\w+)\:\s/', $twitter_status->text, $matches)) {
+      module_load_include('inc', 'twitter');
+      // Use a Forced connection because RTs will probably be from accounts not
+      // defined at our Twitter config.
+      $twitter = twitter_connect(NULL, FALSE, TRUE);
+
+      $twitter_status->text = str_replace($matches[0], '', $twitter_status->text);
+      $twitter_account = $twitter->users_show($matches[1]);
+    }
+
     // Render the tweet.
     $output = theme('twitter_status', array(
       'status' => $twitter_status,
