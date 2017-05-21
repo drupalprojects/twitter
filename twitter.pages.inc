@@ -28,12 +28,14 @@ function twitter_admin_form($form, &$form_state) {
       ),
     ),
   );
-  $form['misc']['twitter_use_default_views'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Use default views'),
-    '#description' => t('The module includes custom displays managed by the Views module. Disabling this option will remove the bundled views provided by the Twitter module, allowing them to be more easily customized and exported.'),
-    '#default_value' => variable_get('twitter_use_default_views', TRUE),
-  );
+  if (module_exists('views')) {
+    $form['misc']['twitter_use_default_views'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Use default views'),
+      '#description' => t('The module includes custom displays managed by the Views module. Disabling this option will remove the bundled views provided by the Twitter module, allowing them to be more easily customized and exported.'),
+      '#default_value' => variable_get('twitter_use_default_views', TRUE),
+    );
+  }
 
   $form['oauth'] = array(
     '#type' => 'fieldset',
@@ -152,8 +154,10 @@ function twitter_user_settings($account = NULL) {
         $variables = array('@run-cron' => url('admin/reports/status/run-cron', array('query' => array('destination' => 'admin/config/services/twitter'))));
         $output['header']['#markup'] .= t('Tweets are pulled from Twitter by <a href="@run-cron">running cron</a>.', $variables) . ' ';
       }
-      $variables = array('@tweets' => url('tweets'));
-      $output['header']['#markup'] .= t('You can view the full list of tweets at the <a href="@tweets">Tweets</a> view.', $variables);
+      if (module_exists('views')) {
+        $variables = array('@tweets' => url('tweets'));
+        $output['header']['#markup'] .= t('You can view the full list of tweets at the <a href="@tweets">Tweets</a> view.', $variables);
+      }
       $output['header']['#markup'] .= '</p>';
       $output['list_form'] = drupal_get_form('twitter_account_list_form', $twitter_accounts);
     }
@@ -257,7 +261,7 @@ function _twitter_account_list_row($account) {
     '#type' => 'checkbox',
     '#default_value' => $account->import ? $account->import : '',
   );
-  if ($account->import == TRUE) {
+  if (module_exists('views') && $account->import == TRUE) {
     $form['import']['#suffix'] = l('View', 'tweets/' . $account->screen_name, array('attributes' => array('target' => '_blank')));
   }
 
