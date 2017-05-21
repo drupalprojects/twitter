@@ -38,6 +38,9 @@ function twitter_post_entity_insert($entity, $entity_type) {
     if ($field_info['type'] == 'twitter_post') {
       // Iterate field instances.
       $items = field_get_items($entity_type, $entity, $field_name);
+      if (empty($items)) {
+        continue;
+      }
       foreach ($items as $delta => $field_instance) {
         if (is_int($delta) && !empty($field_instance['account'])) {
           // Extract data out of each field.
