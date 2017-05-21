@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Definition of Drupal\twitter\Tests\TwitterCore.
- */
-
 namespace Drupal\twitter\Tests;
 
 use Drupal\simpletest\WebTestBase;

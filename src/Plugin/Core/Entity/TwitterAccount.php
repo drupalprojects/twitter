@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Definition of Drupal\twitter\Plugin\Core\Entity\TwitterAccount.
- */
-
 namespace Drupal\twitter\Plugin\Core\Entity;
 
 use Drupal\Core\Entity\EntityNG;

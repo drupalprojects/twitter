@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\twitter\Form\TwitterSettingsForm.
- */
 
 namespace Drupal\twitter\Form;
 

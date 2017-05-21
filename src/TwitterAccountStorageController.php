@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\twitter\TwitterAccountStorageController.
- */
-
 namespace Drupal\twitter;
 
 use Drupal\Core\Entity\DatabaseStorageControllerNG;
