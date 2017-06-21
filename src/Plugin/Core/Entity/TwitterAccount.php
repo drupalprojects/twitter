@@ -3,9 +3,6 @@
 namespace Drupal\twitter\Plugin\Core\Entity;
 
 use Drupal\Core\Entity\EntityNG;
-use Drupal\Core\Entity\Annotation\EntityType;
-use Drupal\Core\Annotation\Translation;
-use Drupal\Core\Language\Language;
 
 /**
  * Defines the twitter account entity class.
@@ -35,10 +32,11 @@ use Drupal\Core\Language\Language;
  * )
  */
 class TwitterAccount extends EntityNG {
+
   /**
-   * Constructor
+   * Constructor.
    */
-  public function __construct($values = array()) {
+  public function __construct($values = []) {
     // Prepare values to match twitter_account table fields.
     if (!empty($values['id'])) {
       $values['twitter_uid'] = $values['id'];
@@ -59,10 +57,11 @@ class TwitterAccount extends EntityNG {
   /**
    * Returns an array with the authentication tokens.
    *
-   * @return array with the oauth token key and secret.
+   * @return array
+   *   Public function getAuth array with the oauth token key and secret.
    */
   public function getAuth() {
-    return array('oauth_token' => $this->oauth_token, 'oauth_token_secret' => $this->oauth_token_secret);
+    return ['oauth_token' => $this->oauth_token, 'oauth_token_secret' => $this->oauth_token_secret];
   }
 
   /**
@@ -71,18 +70,19 @@ class TwitterAccount extends EntityNG {
    * @param array $values
    *   Array with 'oauth_token' and 'oauth_token_secret' keys.
    */
-  public function setAuth($values) {
-    $this->oauth_token = isset($values['oauth_token'])?$values['oauth_token']:NULL;
-    $this->oauth_token_secret = isset($values['oauth_token_secret'])?$values['oauth_token_secret']:NULL;
+  public function setAuth(array $values) {
+    $this->oauth_token = isset($values['oauth_token']) ? $values['oauth_token'] : NULL;
+    $this->oauth_token_secret = isset($values['oauth_token_secret']) ? $values['oauth_token_secret'] : NULL;
   }
 
   /**
    * Checks whether the account is authenticated or not.
    *
-   * @return
+   * @return bool
    *   boolean TRUE when the account is authenticated.
    */
   public function isAuth() {
     return !empty($this->oauth_token) && !empty($this->oauth_token_secret);
   }
+
 }

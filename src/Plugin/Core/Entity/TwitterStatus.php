@@ -2,12 +2,6 @@
 
 namespace Drupal\twitter\Plugin\Core\Entity;
 
-use Drupal\Core\Entity\Entity;
-use Drupal\Core\Entity\Annotation\EntityType;
-use Drupal\Core\Annotation\Translation;
-use Drupal\Core\Language\Language;
-use Drupal\user\UserInterface;
-
 /**
  * Defines the twitter status entity class.
  *
@@ -37,6 +31,8 @@ use Drupal\user\UserInterface;
  */
 class TwitterStatus extends EntityNG {
   /**
+   * Class TwitterStatus.
+   *
    * @var created_at
    */
   public $createdAt;
@@ -60,13 +56,14 @@ class TwitterStatus extends EntityNG {
   public $user;
 
   /**
-   * Constructor for TwitterStatus
+   * Constructor for TwitterStatus.
    */
-  public function __construct($values = array()) {
+  public function __construct($values = []) {
     if (isset($values['user'])) {
       $this->user = new TwitterAccount($values['user']);
       unset($values['user']);
     }
     parent::__construct($values, 'twitter_status');
   }
+
 }
