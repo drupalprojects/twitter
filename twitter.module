@@ -661,6 +661,8 @@ class TwitterStatus extends Entity {
 
   public $retweeted_status;
 
+  public $retweet_count;
+
   /**
    * Constructor for TwitterStatus
    */

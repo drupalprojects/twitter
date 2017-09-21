@@ -115,6 +115,13 @@ function twitter_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'retweet_count' => array(
+        'description' => 'Stores the retweet count for each tweet.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
     ),
     'primary key' => array('twitter_id'),
     'indexes' => array(
@@ -628,5 +635,21 @@ function twitter_update_7513() {
 function twitter_update_7514() {
   if (variable_get('twitter_search', 'https://twitter.com/') == 'http://twitter.com') {
     variable_set('twitter_search', 'https://twitter.com/');
+  }
+}
+
+/**
+ * Adds retweet_count field to twitter table.
+ */
+function twitter_update_7515() {
+  if (!db_field_exists('twitter', 'retweet_count')) {
+    $data = array(
+      'description' => 'Stores the retweet count for each tweet.',
+      'type' => 'int',
+      'unsigned' => TRUE,
+      'not null' => TRUE,
+      'default' => 0,
+    );
+    db_add_field('twitter', 'retweet_count', $data);
   }
 }

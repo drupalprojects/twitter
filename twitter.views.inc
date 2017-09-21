@@ -140,6 +140,24 @@ function twitter_views_data_alter(&$data) {
     ),
   );
 
+  // Retweet count
+  $data['twitter']['retweet_count'] = array(
+    'title' => t('Retweet count'),
+    'help' => t('The retweet count of the Twitter message.'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+      'allow empty' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+
+
   // Twitter source
   $data['twitter']['source'] = array(
     'title' => t('Source'),
