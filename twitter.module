@@ -285,10 +285,10 @@ function twitter_cron() {
   // Nuke old statuses.
   if ($age = variable_get('twitter_expire', 0)) {
     $query = new EntityFieldQuery();
-    $query->entityCondition('entity_type', 'twitter_account')
+    $query->entityCondition('entity_type', 'twitter_status')
       ->propertyCondition('created_time', REQUEST_TIME - $age, '<');
     $result = $query->execute();
-    entity_delete_multiple('twitter_account', array_keys($result['twitter_account']));
+    entity_delete_multiple('twitter_status', array_keys($result['twitter_status']));
   }
 
   watchdog('twitter', 'Finished downloading tweets.');

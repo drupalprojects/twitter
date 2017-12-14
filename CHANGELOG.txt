@@ -18,6 +18,8 @@ Twitter 7.x-6.x-dev, xxxx-xx-xx
   the account that is being re-tweeted, not the account that is doing the
   retweeting.
 #2841765 by SGhosh, qzmenko, andrey.troeglazov: Store retweet count for tweets.
+#2853694 by DamienMcKenna, bbassett, rclemings, joe_pixelrow, saulwilcox:
+  Accounts deleted on cron.
 
 
 Twitter 7.x-6.2, 2015-10-05
