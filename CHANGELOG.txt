@@ -5,6 +5,10 @@ Twitter 7.x-5.x-dev, xxxx-xx-xx
 #2675832 by JamesOakley: Made Tweets view handler use protocol-relative image
   URLs.
 #2803293 by pifagor, soorajshai: Retweets were not being saved correctly.
+#2022717 by rmarques, intrafusion, valgibson, kbrinner, DamienMcKenna, _wdm_,
+  frankdesign, andrey.troeglazov, thatguy: display twitter profile picture of
+  the account that is being re-tweeted, not the account that is doing the
+  retweeting.
 
 
 Twitter 7.x-5.11, 2015-10-05
