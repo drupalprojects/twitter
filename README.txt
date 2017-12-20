@@ -93,11 +93,12 @@ module. The following scenarios are being supported so far:
 
 Credits / Contact
 --------------------------------------------------------------------------------
-Currently maintained by Damien McKenna [1]. Originally written by James Walker
-[2] with many contributions by Michael Hellein [3], Juampy Novillo Requena [4],
-Chris Burgess [5], Jeff Eaton [6] and others in the community.
+Currently maintained by Damien McKenna [1], Andrey Troeglazov [9], Kristen
+Pol [7], and Daniel Rose [8]. Originally written by James Walker [2] with
+many contributions by Michael Hellein [3], Juampy Novillo Requena [4], Chris
+Burgess [5], Jeff Eaton [6] and others in the Drupal community.
 
-Ongoing development is sponsored by Mediacurrent [7].
+Ongoing development is sponsored by Mediacurrent [10], Hook 42 [11], DrupalJedi [12].
 
 The best way to contact the authors is to submit an issue, be it a support
 request, a feature request, or a bug report, in the project issue queue:
@@ -112,4 +113,9 @@ References
 4: https://www.drupal.org/u/juampynr
 5: https://www.drupal.org/u/xurizaemon
 6: https://www.drupal.org/u/eaton
-7: http://www.mediacurrent.com/
+7: https://www.drupal.org/u/kristen-pol
+8: https://www.drupal.org/u/daniel_rose
+9: https://www.drupal.org/u/andreytroeglazov
+10: http://www.mediacurrent.com/
+11: http://www.hook42.com/
+12: http://drupaljedi.com/
