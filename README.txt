@@ -27,7 +27,7 @@ Further installation instructions can be found at:
   https://www.drupal.org/node/1346824
 
 
-How to use the username, hashtag and embedded tweet input filters
+How to use the username, hashtag, and embedded tweet input filters
 --------------------------------------------------------------------------------
 1. Go to admin/settings/filters.
 2. Select the text format where the filters are to be added to.
@@ -45,7 +45,7 @@ body field, e.g.:
 
 https://twitter.com/drupal/status/580521032664145920
 
-These filters are avilable when configuring list of tweets in Views.
+These filters are available when configuring list of tweets in Views.
 
 Note: These filters may be used without OAuth being configured.
 
@@ -84,7 +84,7 @@ module. The following scenarios are being supported so far:
   an email to log in and their account password.
 
 * An existing user signs in with Twitter and then logs in into their Drupal user
-  account. This results in the Twitter account mecoming related to the user
+  account. This results in the Twitter account becoming related to the user
   account so next time Twitter sign-in will work.
 
 * An existing user with an already configured Twitter account can log in
@@ -100,7 +100,7 @@ Chris Burgess [5], Jeff Eaton [6] and others in the community.
 Ongoing development is sponsored by Mediacurrent [7].
 
 The best way to contact the authors is to submit an issue, be it a support
-request, a feature request or a bug report, in the project issue queue:
+request, a feature request, or a bug report, in the project issue queue:
   https://www.drupal.org/project/issues/twitter
 
 
