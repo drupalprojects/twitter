@@ -156,10 +156,32 @@ function twitter_load_authenticated_accounts($uid = NULL, $access_global = TRUE,
 function twitter_status_save($status) {
   // RT's get special handling.
   if (!empty($status->retweeted_status)) {
-    $text = 'RT @' . $status->retweeted_status->user->screen_name . ': ' . $status->retweeted_status->text;
+    if (is_array($status->retweeted_status)) {
+      $text = 'RT @' . $status->retweeted_status['user']['screen_name'];
+      if (empty($status->retweeted_status['full_text'])) {
+         $text .= ': ' . $status->retweeted_status['text'];
+      }
+      else {
+        $text .= ': ' . $status->retweeted_status['full_text'];
+      }
+    }
+    else {
+      $text = 'RT @' . $status->retweeted_status->user->screen_name;
+      if (empty($status->retweeted_status->full_text)) {
+        $text .= ': ' . $status->retweeted_status->text;
+      }
+      else {
+        $text .= ': ' . $status->retweeted_status->full_text;
+      }
+    }
   }
   else {
-    $text = $status->text;
+    if (empty($status->full_text)) {
+      $text = $status->text;
+    }
+    else {
+      $text = $status->full_text;
+    }
   }
 
   $twitter_status = new TwitterStatus();
