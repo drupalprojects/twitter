@@ -211,11 +211,21 @@ class Twitter {
    *   The path of the endpoint.
    * @param string $format
    *   The format of the endpoint to be appended at the end of the path.
+   * @param bool $extended
+   *   If set to TRUE, sets the endpoint to retrieve the extended mode version
+   *   of the tweet. If set to FALSE, sets the endpoint to retrieve the
+   *   compatibility mode version of the tweet.
+   *
    * @return
    *   The complete path to the endpoint.
    */
-  protected function create_url($path, $format = '.json') {
-    $url =  variable_get('twitter_api', TWITTER_API) .'/1.1/'. $path . $format;
+  protected function create_url($path, $format = '.json', $extended = FALSE) {
+    if ($extended) {
+      $url =  variable_get('twitter_api', TWITTER_API) .'/1.1/'. $path . $format . '?tweet_mode=extended';
+    }
+    else {
+      $url =  variable_get('twitter_api', TWITTER_API) .'/1.1/'. $path . $format;
+    }
     return $url;
   }
 
@@ -1238,11 +1248,65 @@ class Twitter {
   /********************************************//**
    * Utilities
    ***********************************************/
+
   /**
    * Calls a Twitter API endpoint.
+   *
+   * @param string $path
+   *   The location of the endpoint.
+   * @param array $params
+   *   Any parameters the endpoint needs to complete the call.
+   * @param string $method
+   *   The REST method to use when making the call.
+   *
+   * @return array
+   *   The decoded JSON reply.
    */
   public function call($path, $params = array(), $method = 'GET') {
-    $url = $this->create_url($path);
+    $parsed_response = $this->getParsedResponse($path, $params, $method);
+    // If 'truncated' is set to 1 or TRUE, then the full tweet was not
+    // retrieved and the extended mode version of the tweet needs to be called
+    // to retrieve the full tweet.
+    // This is also attempted if the response is empty.
+    if (isset($parsed_response['id'])) {
+      if (!empty($parsed_response['truncated'])) {
+        $parsed_response = $this->getParsedResponse($path, $params, $method, TRUE);
+      }
+    }
+    else {
+      foreach ($parsed_response as $response) {
+        if (!empty($response['truncated'])) {
+          $parsed_response = $this->getParsedResponse($path, $params, $method, TRUE);
+          break;
+        }
+      }
+    }
+    return $parsed_response;
+  }
+
+  /**
+   * Retrieves the parsed response of the Twitter API endpoint call.
+   *
+   * @param string $path
+   *   The location of the endpoint.
+   * @param array $params
+   *   Any parameters the endpoint needs to complete the call.
+   * @param string $method
+   *   The REST method to use when making the call.
+   * @param bool $extended
+   *   If set to TRUE, retrieves the extended mode version of the tweet. If set
+   *   to FALSE, retrieves the compatibility mode version of the tweet.
+   *
+   * @return array
+   *   The decoded JSON reply.
+   */
+  public function getParsedResponse($path, array $params = array(), $method = 'GET', $extended = FALSE) {
+    if ($extended) {
+      $url = $this->create_url($path, '.json', TRUE);
+    }
+    else {
+      $url = $this->create_url($path);
+    }
 
     try {
       $response = $this->auth_request($url, $params, $method);
@@ -1258,6 +1322,7 @@ class Twitter {
 
     return $this->parse_response($response);
   }
+
 }
 
 /**
@@ -1297,7 +1362,12 @@ class TwitterStatus {
   public function __construct($values = array()) {
     $this->created_at = $values['created_at'];
     $this->id = $values['id'];
-    $this->text = $values['text'];
+    if (isset($values['full_text'])) {
+      $this->text = $values['full_text'];
+    }
+    else {
+      $this->text = $values['text'];
+    }
     $this->source = $values['source'];
     $this->truncated = $values['truncated'];
     $this->favorited = $values['favorited'];

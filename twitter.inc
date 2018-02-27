@@ -220,10 +220,32 @@ function twitter_status_load($status_id) {
 function twitter_status_save($status) {
   // RT's get special handling.
   if (!empty($status->retweeted_status)) {
-    $text = 'RT @' . $status->retweeted_status->user->screen_name . ': ' . $status->retweeted_status->text;
+    if (is_array($status->retweeted_status)) {
+      $text = 'RT @' . $status->retweeted_status['user']['screen_name'];
+      if (empty($status->retweeted_status['full_text'])) {
+        $text .= ': ' . $status->retweeted_status['text'];
+      }
+      else {
+        $text .= ': ' . $status->retweeted_status['full_text'];
+      }
+    }
+    else {
+      $text = 'RT @' . $status->retweeted_status->user->screen_name;
+      if (empty($status->retweeted_status->full_text)) {
+        $text .= ': ' . $status->retweeted_status->text;
+      }
+      else {
+        $text .= ': ' . $status->retweeted_status->full_text;
+      }
+    }
   }
   else {
-    $text = $status->text;
+    if (empty($status->full_text)) {
+      $text = $status->text;
+    }
+    else {
+      $text = $status->full_text;
+    }
   }
 
   $row = array(
