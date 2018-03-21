@@ -35,8 +35,8 @@ function twitter_entity_info() {
       'base table' => 'twitter_account',
       'entity keys' => array(
         'id' => 'twitter_uid',
+        'label' => 'screen_name',
       ),
-      'label callback' => 'entity_class_label',
       'uri callback' => 'entity_class_uri',
     ),
   );
@@ -679,6 +679,38 @@ class TwitterStatus extends Entity {
 
     parent::__construct($values, 'twitter_status');
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function defaultLabel() {
+    $label = t('No label defined for this tweet.');
+    if (isset($this->text)) {
+      $text = truncate_utf8($this->text, 140, TRUE, TRUE);
+      if (isset($this->screen_name)) {
+        $screen_name = t('Tweet by @screen_name', array('@screen_name' => $this->screen_name));
+      }
+      if (isset($this->created_time)) {
+        $created_time = t('on @created_time', array('@created_time' => format_date($this->created_time)));
+      }
+
+      $label = $text;
+      if (!empty($screen_name)) {
+        if (!empty($created_time)) {
+          $label = $screen_name . ' ' . $created_time . ': ' . $text;
+        }
+        else {
+          $label = $screen_name . ': ' . $text;
+        }
+      }
+    }
+    elseif (isset ($this->screen_name)) {
+      $label = t('Tweet by @screen_name.', array('@screen_name' => $this->screen_name));
+    }
+    // Add in the translated specified label property.
+    return $label;
+  }
+
 }
 
 /**
