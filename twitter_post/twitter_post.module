@@ -179,6 +179,9 @@ function twitter_post_node_insert($node) {
       $replacements['!tinyurl'] = twitter_shorten_url(url('node/' . $node->nid, array('absolute' => TRUE)));
     }
 
+    // Modify replacement from other modules.
+    drupal_alter('twitter_post_replacement', $replacements, $node);
+
     $status = strtr($node->twitter['status'], $replacements);
     try {
       $status = twitter_set_status($twitter_account, $status);
