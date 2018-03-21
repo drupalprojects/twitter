@@ -110,7 +110,9 @@ function twitter_load_accounts() {
 function twitter_load_account_names() {
   $accounts = array();
   foreach (twitter_load_accounts() as $account) {
-    $accounts[$account->id] = check_plain($account->name);
+    if (isset($account->twitter_uid) && isset($account->name)) {
+      $accounts[$account->twitter_uid] = check_plain($account->name);
+    }
   }
   return $accounts;
 }
