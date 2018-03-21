@@ -31,9 +31,12 @@ function twitter_post_field_widget_info() {
 }
 
 /**
- * Implement hook_field_widget().
+ * Implements hook_field_widget_form().
  */
-function twitter_post_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta = 0, $element) {
+function twitter_post_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  if (!is_numeric($delta)) {
+    $delta = 0;
+  }
   // Load the default values for this field.
   if (isset($instance['default_value'][$delta])) {
     $defaults = $instance['default_value'][$delta];
@@ -42,7 +45,7 @@ function twitter_post_field_widget_form(&$form, &$form_state, $field, $instance,
   // If none were found, start with some reasonable defaults.
   else {
     $defaults = array(
-      'status' => FALSE,
+      'status' => 0,
       'message' => _twitter_post_default_message($instance['entity_type']),
     );
   }
@@ -53,7 +56,7 @@ function twitter_post_field_widget_form(&$form, &$form_state, $field, $instance,
 
   // If this entity was previously published, disable the status.
   if (isset($element['#entity']) && !empty($element['#entity']->status)) {
-    $status = FALSE;
+    $status = 0;
   }
 
   // Build the basic fields.
