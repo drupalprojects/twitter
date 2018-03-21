@@ -437,6 +437,9 @@ function twitter_filter_message($message, $usernames = TRUE, $hashtags = TRUE, $
     $message = _filter_url($message, $filter);
   }
 
+  // Add twitter message filter alter.
+  drupal_alter('twitter_filter_message', $message);
+
   // Avoid XSS within the message.
   return filter_xss($message);
 }
