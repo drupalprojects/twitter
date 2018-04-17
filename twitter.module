@@ -619,5 +619,7 @@ function _twitter_user_profile($screen_name) {
  *   A TwitterStatus object.
  */
 function _twitter_status_url($status) {
-  return TWITTER_HOST . '/' . $status->user->screen_name . '/status/' . $status->id;
+  if ($status) {
+    return TWITTER_HOST . '/' . $status->user->screen_name . '/status/' . $status->id;
+  }
 }
