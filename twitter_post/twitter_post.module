@@ -71,6 +71,9 @@ function twitter_post_entity_insert($entity, $entity_type) {
                 '@status' => _twitter_status_url($status),
               )));
             }
+            else {
+              drupal_set_message(t('An empty status was returned. Check the system log for details.'), 'error');
+            }
           }
         }
       }

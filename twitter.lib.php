@@ -156,6 +156,11 @@ class Twitter {
       if (isset($data['error'])) {
         $error = $data['error'];
       }
+      elseif (isset($data['errors']) && is_array($data['errors'])) {
+        foreach ($data['errors'] as $errors_data) {
+          $error .= "\n" . $errors_data['code'] . ': ' . $errors_data['message'];
+        }
+      }
       throw new TwitterException($error);
     }
   }
@@ -167,7 +172,12 @@ class Twitter {
   public function retweet($tweet_id, $params = array()) {
     $params = array();
     $values = $this->call('statuses/retweet/' . $tweet_id, $params, 'POST', TRUE);
-    return new TwitterStatus($values);
+    $result = FALSE;
+    if (!empty($values)) {
+      $result = new TwitterStatus($values);
+    }
+
+    return $result;
   }
 
   /**
@@ -415,7 +425,12 @@ class Twitter {
   public function statuses_update($status, $params = array()) {
     $params['status'] = $status;
     $values = $this->call('statuses/update', $params, 'POST');
-    return new TwitterStatus($values);
+    $result = FALSE;
+    if (!empty($values)) {
+      $result = new TwitterStatus($values);
+    }
+
+    return $result;
   }
 
   /**
@@ -430,7 +445,12 @@ class Twitter {
    */
   public function statuses_retweet($id, $params = array()) {
     $values = $this->call('statuses/retweet/' . $id, $params, 'POST');
-    return new TwitterStatus($values);
+    $result = FALSE;
+    if (!empty($values)) {
+      $result = new TwitterStatus($values);
+    }
+
+    return $result;
   }
 
   /**
@@ -450,7 +470,12 @@ class Twitter {
     $params['media[]'] = '@{' . implode(',', $media) . '}';
     $values = $this->call('statuses/statuses/update_with_media', $params, 'POST');
     // @TODO support media at TwitterStatus class.
-    return new TwitterStatus($values);
+    $result = FALSE;
+    if (!empty($values)) {
+      $result = new TwitterStatus($values);
+    }
+
+    return $result;
   }
 
   /**
