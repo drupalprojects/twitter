@@ -11,6 +11,19 @@ define ('TWITTER_TINYURL',      'http://tinyurl.com');
 define ('TWITTER_OAUTH_CALLBACK_URL', 'twitter/oauth');
 
 /**
+ * Implements hook_help().
+ */
+function twitter_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#twitter':
+      $output = '';
+      $output .= '<p>' . t('This module provides API integration with the Twitter microblogging service.') . '</p>';
+      $output .= '<p>' . t('For more information, please visit the official <a href="@url">project page</a> on Drupal.org.', array('@url' => 'https://www.drupal.org/project/twitter')) . '</p>';
+      return $output;
+  }
+}
+
+/**
  * Implements hook_entity_info().
  */
 function twitter_entity_info() {
