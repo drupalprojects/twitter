@@ -7,13 +7,13 @@ core = 7.x
 configure = admin/config/services/twitter
 
 ; Allow use of the new dependency structure added to v7.40.
-dependencies[] = system (>= 7.40)
+dependencies[] = system
 
 ; This requires the OAuth Common module from the OAuth package.
 dependencies[] = oauth:oauth_common
 
 ; Also require the Entity API module.
-dependencies[] = entity
+dependencies[] = entity:entity
 
 ; The main classes used in the module.
 files[] = twitter.lib.php

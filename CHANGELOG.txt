@@ -9,6 +9,7 @@ Twitter 7.x-5.x-dev, xxxx-xx-xx
   frankdesign, andrey.troeglazov, thatguy: display twitter profile picture of
   the account that is being re-tweeted, not the account that is doing the
   retweeting.
+#2593061 by DamienMcKenna: Support the project-vs-module dependency structure.
 
 
 Twitter 7.x-5.11, 2015-10-05
